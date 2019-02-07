@@ -8,9 +8,13 @@ import { Link } from 'react-router-dom';
 
 
 const styles = {
-  root: {
-    flexGrow: 1,
-  },
+    root: {
+        flexGrow: 1,
+    },
+    tabs: {
+        display:'flex',
+        justifyContent: 'center'
+    },
 };
 
 class CenteredTabs extends React.Component {
@@ -32,7 +36,7 @@ class CenteredTabs extends React.Component {
           onChange={this.handleChange}
           indicatorColor="primary"
           textColor="primary"
-          centered
+          className={classes.tabs}
         >
           <Tab to="people" label="People" to='/people' component={Link} />
           <Tab to="planets" label="Planets" to='/planets' component={Link}/>

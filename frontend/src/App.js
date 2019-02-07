@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from 'react-apollo'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
 import NavBar from './components/NavBar'
+import PeopleView from './views/PeopleView.js'
+import PlanetsView from './views/PlanetsView.js'
+
 
 const containerStyle = {
   width: '100%',
@@ -11,7 +14,7 @@ const containerStyle = {
   margin: 'auto'
 }
 const client = new ApolloClient({
-  uri: '/graphql'
+  uri: 'http://localhost:5000/graphql'
 })
 
 class App extends Component {
@@ -21,10 +24,13 @@ class App extends Component {
           <Router>
             
             <div className="container" style={{...containerStyle}}>
-              <NavBar/>
-              {/* <Route exact path='/' component={Launches}/>
-              <Route exact path='/launch/:flight_number' component={Launch}/> */}
+              <NavBar />
+              <Switch>
+                {<Redirect from="/" to="/people" exact/>}
 
+                <Route path ="/people" component={PeopleView} />
+                <Route path ="/planets" component={PeopleView} />
+              </Switch>
 
             </div>
           </Router>
