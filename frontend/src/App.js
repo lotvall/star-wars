@@ -29,7 +29,7 @@ class App extends Component {
                 {<Redirect from="/" to="/people" exact/>}
 
                 <Route path ="/people" component={PeopleView} />
-                <Route path ="/planets" component={PeopleView} />
+                <Route path ="/planets" component={PlanetsView} />
               </Switch>
 
             </div>
