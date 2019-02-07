@@ -1,17 +1,31 @@
 const fetch = require('node-fetch')
-
 // const DataLoader = require ('dataloader')
 
-// const peopleLoader = new DataLoader(() => {
-//     return getEvents(eventIds)
-// })
-// const planetLoader = new DataLoader(() => {
-//    return User.find({_id: {$in: userIds}})
-// })
+const fetchPlanet = async (planetUrl) => {
+    const response = await fetch(planetUrl)
+    const planet = await response.json()
+    return planet
+}
+
+const fetchPerson = async (personUrl) => {
+
+    const response = await fetch(personUrl)
+    const person = await response.json()
+
+    return person
+}
 
 const resolvers = {
 
     person: async ({ personUrl }) => {
+        const person = await fetchPerson(personUrl)
+        const homeworld = await fetchPlanet(person.homeworld)
+
+        return {
+            name: person.name,
+            url: person.url,
+            homeworld
+        }
 
     },
     allPeople: async () => {
@@ -21,12 +35,12 @@ const resolvers = {
             const data = await response.json()
             const people = data.results
             return people.map((person) => {
-                console.log(person)
                 const planetUrl = person.homeworld
+                const homeworld = fetchPlanet(planetUrl)
                 return {
                     name: person.name,
                     url: person.url,
-                    homeworld: planet(planetUrl)
+                    homeworld
                 }
             })
         } catch(err) {
@@ -35,13 +49,17 @@ const resolvers = {
     },
 
     planet: async ( { planetUrl } ) => {
-        console.log(planetUrl)
         try {
+
             const response = await fetch(planetUrl)
             const planet = await response.json()
+            const residents = planet.residents.map(personUrl => {
+                return fetchPerson(personUrl)
+            })
             return {
                 name: planet.name,
                 url: planet.url,
+                residents 
             }
         } catch (err) {
             throw err
@@ -55,12 +73,14 @@ const resolvers = {
             const data = await response.json()
             const allPlanets = data.results
             return allPlanets.map((planet) => {
-                console.log(planet)
                 const personUrls = planet.residents
+                const residents = personUrls.map((personUrl) => {
+                    return fetchPerson(personUrl)
+                })
                 return {
                     name: planet.name,
                     url: planet.url,
-                    residents: personUrls
+                    residents
                 }
             })
         } catch(err) {
