@@ -28,7 +28,7 @@ class App extends Component {
               <Switch>
                 {<Redirect from="/" to="/people" exact/>}
 
-                <Route path ="/people" component={PeopleView} />
+                <Route path ="/people" component={PeopleView } />
                 <Route path ="/planets" component={PlanetsView} />
               </Switch>
 

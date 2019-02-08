@@ -9,8 +9,8 @@ const styles = theme => {
 }
 
 const PEOPLE_QUERY = gql`
-    query PeopleQuery {
-        allPeople {
+    query PeopleQuery ($nr: Int){
+        allPeople (pageNr: $nr) {
             name
             url
             homeworld {
@@ -21,21 +21,27 @@ const PEOPLE_QUERY = gql`
 `
 
 class PeopleView extends Component { 
+
+    state = {
+        pageNr: 1
+    }
     render(){
         const { classes } = this.props
+
         return (
             <>
                 <h1 className="display-4 my-3">
                     People
                 </h1>
 
-                <Query query={PEOPLE_QUERY}>
+
+                <Query query={PEOPLE_QUERY} variables={{"nr": 7}}>
                     {
                         ({loading, error, data}) => {
 
                             if(loading) return <h4>Loading....</h4>
                             if(error) console.log('there was an error', error)
-                            if(data) console.log('we got the data', data)
+                            if(data) console.log('we got the data', this.state.pageNr)
 
                             return <PeopleList allPeople={data.allPeople} />
                         }

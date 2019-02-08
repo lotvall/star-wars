@@ -6,7 +6,7 @@ import PlanetsList from '../components/PlanetsList'
 
 const PLANETS_QUERY = gql`
     query PlanetsQuery {
-        allPlanets {
+        allPlanets(pageNr: 4) {
             name
             url
             residents {

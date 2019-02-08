@@ -28,10 +28,10 @@ const resolvers = {
         }
 
     },
-    allPeople: async () => {
-
+    allPeople: async ({ pageNr }) => {
+        console.log('logging the page number', pageNr)
         try {
-            const response = await fetch('https://swapi.co/api/people')
+            const response = await fetch(`https://swapi.co/api/people/?page=${pageNr}`)
             const data = await response.json()
             const people = data.results
             return people.map((person) => {
@@ -67,9 +67,10 @@ const resolvers = {
 
     },
 
-    allPlanets: async() => {
+    allPlanets: async({pageNr}) => {
         try {
-            const response = await fetch('https://swapi.co/api/planets')
+            console.log('logging planetpagenr', pageNr)
+            const response = await fetch(`https://swapi.co/api/planets/?page=${pageNr}`)
             const data = await response.json()
             const allPlanets = data.results
             return allPlanets.map((planet) => {

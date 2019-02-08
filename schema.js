@@ -14,10 +14,10 @@ const schema = buildSchema(`
   }
 
   type RootQuery {
-    allPeople: [Person!]!
+    allPeople(pageNr: Int): [Person!]!
     person(personUrl: String!): Person!
 
-    allPlanets:[Planet!]!
+    allPlanets(pageNr: Int):[Planet!]!
     planet(planetUrl: String!): Planet!
   }
 
