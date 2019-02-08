@@ -7,29 +7,7 @@ const UrlLoader = new DataLoader(urls =>
 async function getFromUrl(url) {
     const response = await fetch(url)
     const data = await response.json()
-    console.log('how many times is this called')
     return data
-}
-// UrlLoader.load("https://swapi.co/api/planets/1/")
-// UrlLoader.load("https://swapi.co/api/planets/3/")
-// UrlLoader.load("https://swapi.co/api/planets/4/")
-// UrlLoader.load("https://swapi.co/api/planets/5/")
-// UrlLoader.load("https://swapi.co/api/planets/13/")
-
-const fetchPlanet = async (Url) => {
-    console.log('how many times is this called (in direct fetch) ')
-
-    const response = await fetch(Url)
-    const unit = await response.json()
-    return unit
-}
-
-const fetchPerson = async (personUrl) => {
-
-    const response = await fetch(personUrl)
-    const person = await response.json()
-
-    return person
 }
 
 const resolvers = {
