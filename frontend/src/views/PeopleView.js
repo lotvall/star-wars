@@ -35,7 +35,7 @@ class PeopleView extends Component {
                 </h1>
 
 
-                <Query query={PEOPLE_QUERY} variables={{"nr": 7}}>
+                <Query query={PEOPLE_QUERY} variables={{"nr": 1}}>
                     {
                         ({loading, error, data}) => {
 

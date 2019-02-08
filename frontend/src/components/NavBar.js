@@ -6,16 +6,16 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Link } from 'react-router-dom';
 
-
-const styles = {
+const styles = theme => ({
     root: {
         flexGrow: 1,
     },
     tabs: {
         display:'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+
     },
-};
+});
 
 class CenteredTabs extends React.Component {
   state = {
