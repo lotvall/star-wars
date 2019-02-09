@@ -171,8 +171,8 @@ class SimpleTable extends Component {
 
                 <TablePagination
                   rowsPerPageOptions={[10]}
-                  colSpan={3}
-                  count={87}
+                  colSpan={2}
+                  count={61}
                   rowsPerPage={10}
                   page={page}
                   SelectProps={{

@@ -6,6 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Link } from 'react-router-dom';
 
+import {withRouter} from 'react-router-dom';
+
+
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -19,15 +22,36 @@ const styles = theme => ({
 
 class CenteredTabs extends React.Component {
   state = {
-    value: 0,
+    value: undefined,
   };
+
 
   handleChange = (event, value) => {
     this.setState({ value });
   };
+  componentDidMount = () => {
+    // this code doesnt work yet
+    // conditional always returns false
+    // also, when state.value = undefined a tiny selector renders / remove this
+    console.log('component did mount', this.props.location.pathname, typeof(this.props.location.pathname))
+    if (this.props.location.pathnamme == '/planets') {
+      console.log('if statement running')
+      this.setState({
+        value: 1
+      })
+    } else {
+      console.log('else statement running')
+
+      this.setState({
+        value: 0
+      })
+    } 
+  }
 
   render() {
     const { classes } = this.props;
+    const {pathname} = this.props.location;
+    console.log('render method', this.props.location.pathname, typeof(this.props.location.pathname))
 
     return (
       <Paper className={classes.root}>
@@ -50,4 +74,4 @@ CenteredTabs.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CenteredTabs);
+export default withRouter(withStyles(styles)(CenteredTabs))
