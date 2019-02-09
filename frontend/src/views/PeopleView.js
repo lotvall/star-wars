@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import PeopleList from '../components/PeopleList'
+import Spinner from '../components/Spinner'
 
 const styles = theme => {
 
@@ -23,7 +24,9 @@ const PEOPLE_QUERY = gql`
 class PeopleView extends Component { 
 
     state = {
-        page: 0
+        page: 0,
+        allPeople: [],
+        isLoading: false,
     }
 
     handleChangePage = (event, page) => {
@@ -36,17 +39,20 @@ class PeopleView extends Component {
 
         return (
             <>
-
-
                 <Query query={PEOPLE_QUERY} variables={{"nr": this.state.page + 1}}>
                     {
                         ({loading, error, data}) => {
 
-                            if(loading) return <h1>add spinner or LoadingList here....</h1>//add spinner here
-                            if(error) console.log('there was an error', error)
-                            if(data) console.log('we got the data', this.state.pageNr)
+                            console.log(this.state.allPeople)
+                            console.log('logging some data', data)
 
-                            return <PeopleList allPeople={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/>
+                            if(loading) return data.allPeople ? <PeopleList loading={true} allPeople={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/> : <Spinner />
+                            if(error) console.log('there was an error', error)
+                            if(data) {
+                                console.log('we got the data', this.state.pageNr)
+                                
+                                return <PeopleList loading={false} allPeople={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/>
+                            }
                         }
                     }
                 </Query>

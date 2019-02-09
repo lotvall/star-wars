@@ -30,6 +30,8 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 
+import Spinner from './MiniSpinner'
+
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3,
@@ -44,7 +46,7 @@ const styles = theme => ({
       alignItems: 'center'
   },
   table: {
-    minWidth: 600,
+    minWidth: 100,
   },
 });
 
@@ -134,7 +136,7 @@ class SimpleTable extends Component {
     
 
     render() {
-        const { classes , allPeople, page, onChangePage } = this.props;
+        const { classes , allPeople, page, onChangePage, loading } = this.props;
         console.log(allPeople)
         return (
             <div className={classes.div}>
@@ -160,6 +162,14 @@ class SimpleTable extends Component {
                 </TableBody>
                 <TableFooter>
               <TableRow>
+              <TableCell align="right">
+                { 
+                  loading && <Spinner/>                 
+                }
+              </TableCell>
+                
+              
+
                 <TablePagination
                   rowsPerPageOptions={[10]}
                   colSpan={3}
