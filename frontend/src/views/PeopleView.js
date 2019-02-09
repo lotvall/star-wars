@@ -21,11 +21,11 @@ const PEOPLE_QUERY = gql`
     }
 `
 
+
 class PeopleView extends Component { 
 
     state = {
         page: 0,
-        allPeople: [],
         isLoading: false,
     }
 
@@ -34,8 +34,7 @@ class PeopleView extends Component {
     };
 
     render(){
-        const { classes } = this.props
-        const dummyPeople = [{}, {},{},{},{},{},{},{},{},{},]
+        const { classes} = this.props
 
         return (
             <>
@@ -43,15 +42,14 @@ class PeopleView extends Component {
                     {
                         ({loading, error, data}) => {
 
-                            console.log(this.state.allPeople)
                             console.log('logging some data', data)
 
-                            if(loading) return data.allPeople ? <PeopleList loading={true} allPeople={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/> : <Spinner />
+                            if(loading) return data.allPeople ? <PeopleList loading={true} data={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/> : <Spinner />
                             if(error) console.log('there was an error', error)
                             if(data) {
                                 console.log('we got the data', this.state.pageNr)
                                 
-                                return <PeopleList loading={false} allPeople={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/>
+                                return <PeopleList loading={false} data={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/>
                             }
                         }
                     }

@@ -136,8 +136,7 @@ class SimpleTable extends Component {
     
 
     render() {
-        const { classes , allPeople, page, onChangePage, loading } = this.props;
-        console.log(allPeople)
+        const { classes , data, page, onChangePage, loading } = this.props;
         return (
             <div className={classes.div}>
             <Paper className={classes.root}>
@@ -150,7 +149,7 @@ class SimpleTable extends Component {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {allPeople.map(person => (
+                {data.map(person => (
                     <TableRow key={person.url}>
                     <TableCell component="th" scope="row">
                         {person.name}
