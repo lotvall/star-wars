@@ -7,6 +7,10 @@ const PlanetItem = ({url, name, residents}) => {
         <div>
             <p>Planet: {name}</p>
             <p>Residents: {residents.length}</p>
+            {residents.map(resident => {
+                return <p>{resident.name}</p>
+            })}
+            <p>---------------</p>
         </div>
         </>
     )

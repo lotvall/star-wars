@@ -23,27 +23,30 @@ const PEOPLE_QUERY = gql`
 class PeopleView extends Component { 
 
     state = {
-        pageNr: 1
+        page: 0
     }
+
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
+
     render(){
         const { classes } = this.props
+        const dummyPeople = [{}, {},{},{},{},{},{},{},{},{},]
 
         return (
             <>
-                <h1 className="display-4 my-3">
-                    People
-                </h1>
 
 
-                <Query query={PEOPLE_QUERY} variables={{"nr": 1}}>
+                <Query query={PEOPLE_QUERY} variables={{"nr": this.state.page + 1}}>
                     {
                         ({loading, error, data}) => {
 
-                            if(loading) return <h4>Loading....</h4>
+                            if(loading) return <h1>add spinner or LoadingList here....</h1>//add spinner here
                             if(error) console.log('there was an error', error)
                             if(data) console.log('we got the data', this.state.pageNr)
 
-                            return <PeopleList allPeople={data.allPeople} />
+                            return <PeopleList allPeople={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/>
                         }
                     }
                 </Query>
