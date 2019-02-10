@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Link } from 'react-router-dom';
 
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -22,7 +22,7 @@ const styles = theme => ({
 
 class CenteredTabs extends React.Component {
   state = {
-    value: undefined,
+    value: false,
   };
 
 
@@ -30,11 +30,9 @@ class CenteredTabs extends React.Component {
     this.setState({ value });
   };
   componentDidMount = () => {
-    // this code doesnt work yet
-    // conditional always returns false
-    // also, when state.value = undefined a tiny selector renders / remove this
-    console.log('component did mount', this.props.location.pathname, typeof(this.props.location.pathname))
-    if (this.props.location.pathnamme == '/planets') {
+    const path = this.props.location.pathname
+    console.log('state/value ', this.state.value)
+    if (path === '/planets') {
       console.log('if statement running')
       this.setState({
         value: 1
@@ -50,8 +48,6 @@ class CenteredTabs extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const {pathname} = this.props.location;
-    console.log('render method', this.props.location.pathname, typeof(this.props.location.pathname))
 
     return (
       <Paper className={classes.root}>

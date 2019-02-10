@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import NavBar from './components/NavBar'
 import PeopleView from './views/PeopleView.js'
 import PlanetsView from './views/PlanetsView.js'
+import SinglePersonView from './views/SinglePersonView.js'
+import SinglePlanetView from './views/SinglePlanetView.js'
 
 
 const containerStyle = {
@@ -30,8 +32,11 @@ class App extends Component {
               <Switch>
                 {<Redirect from="/" to="/people" exact/>}
 
-                <Route path ="/people" component={PeopleView } />
+                <Route exact path ="/people" component={PeopleView } />
                 <Route path ="/planets" component={PlanetsView} />
+
+                <Route exact path='/people/:person_url' component={SinglePersonView}/>
+                <Route exact path='/planets/:planet_url' component={SinglePlanetView}/>
               </Switch>
 
             </div>

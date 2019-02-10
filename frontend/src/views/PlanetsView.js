@@ -32,14 +32,17 @@ class PlanetsView extends Component {
     render(){
         return (
             <>
-
                 <Query query={PLANETS_QUERY} variables={{"nr": this.state.page + 1}}>
                     {
                         ({loading, error, data}) => {
 
                             if(loading) return data.allPlanets ? <PlanetsList loading={true} data={data.allPlanets} page={this.state.page} onChangePage={this.handleChangePage}/> : <Spinner />
                             if(error) console.log('there was an error', error)
-                            if(data) console.log('we got the data', data)
+                            if(data) console.log('we got the data', data.allPlanets[0].url)
+
+                            const url = data.allPlanets[0].url
+                            const id = url.replace(/[\D]/g, '');
+                            console.log(id)
 
                             return <PlanetsList loading={false} data={data.allPlanets} page={this.state.page} onChangePage={this.handleChangePage}/>
                         }

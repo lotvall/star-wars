@@ -15,7 +15,7 @@ const schema = buildSchema(`
 
   type RootQuery {
     allPeople(pageNr: Int): [Person!]!
-    person(personUrl: String!): Person!
+    person(personId: Int!): Person!
 
     allPlanets(pageNr: Int):[Planet!]!
     planet(planetUrl: String!): Planet!

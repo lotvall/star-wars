@@ -12,14 +12,17 @@ async function getFromUrl(url) {
 
 const resolvers = {
 
-    person: async ({ personUrl }) => {
-        const person = UrlLoader.load(personUrl)
-        const homeworld = UrlLoader.load(person.homeworld)
+    person: async ({ personId }) => {
+        const person = await UrlLoader.load(`https://swapi.co/api/people/${personId}/`)
+        const homeworld = await UrlLoader.load(person.homeworld)
 
+        console.log('the homeworld',homeworld)
+        // residents are an array of urls not an array of People~
+        // cannot query: homeworld {residents { name } }
         return {
             name: person.name,
             url: person.url,
-            homeworld
+            homeworld  
         }
 
     },
