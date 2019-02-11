@@ -31,7 +31,9 @@ const resolvers = {
         try {
             const response = await fetch(`https://swapi.co/api/people/?page=${pageNr}`)
             const data = await response.json()
+
             const people = data.results
+            console.log('logging people', people)
             return people.map((person) => {
                 const planetUrl = person.homeworld
                 const homeworld = UrlLoader.load(planetUrl)

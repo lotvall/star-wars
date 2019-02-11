@@ -28,9 +28,11 @@ class SinglePersonView extends Component {
 
     render() {
 
-        console.log('params from rops',this.props.match.params)
         const id = parseInt(this.props.match.params.person_url)
         console.log(id)
+        const pageNr = this.props.location.state.pageNr
+
+
         return(
             <>
             
@@ -41,7 +43,7 @@ class SinglePersonView extends Component {
                         if(error) console.log('there was an error', error)
                         if(data) console.log(data)
                         const {name, homeworld, url} = data.person
-                        return <PersonItem name={name} homeworld={homeworld} url={url} />
+                        return <PersonItem pageNr={pageNr} name={name} homeworld={homeworld} url={url} id={id}/>
                     }
                 }
             </Query>

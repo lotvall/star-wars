@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom'
+
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3,
@@ -16,11 +19,14 @@ const styles = theme => ({
   },
   div:{
       display: 'flex',
-      justifyContent:'center'
+      justifyContent:'center',
+      flexWrap: 'wrap'
+
   }
 });
 
-const PersonItem = ({url, name, homeworld, classes}) => {
+const PersonItem = ({id, url, name, homeworld, classes, pageNr}) => {
+    console.log('pagenr in personitem',pageNr)
     return (
         <div className={classes.div}>
             <Paper className={classes.root} elevation={1}>
@@ -34,6 +40,9 @@ const PersonItem = ({url, name, homeworld, classes}) => {
                 </Typography>
 
             </Paper>
+
+            <Button style={{width: '300px'}} component={Link} to={{ pathname: '/people', state: { pageNr: pageNr} }} variant="contained" color="primary" className={classes.button}>Back</Button>
+
             
         </div>
     )

@@ -20,8 +20,6 @@ import Button from '@material-ui/core/Button';
 
 import { Link } from 'react-router-dom'
 
-
-
 import Spinner from './MiniSpinner'
 
 const styles = theme => ({
@@ -38,7 +36,6 @@ const styles = theme => ({
       alignItems: 'center'
   },
   table: {
-    minWidth: 100,
   },
 });
 
@@ -132,27 +129,25 @@ class SimpleTable extends Component {
 
     render() {
         const { classes , data, page, onChangePage, loading } = this.props;
+        console.log('page number im peoplelist ',page)
         return (
             <div className={classes.div}>
             <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>
                 <TableRow>
-                    <TableCell>People</TableCell>
-                    <TableCell align="right">Homeworld</TableCell>
-                    <TableCell align="right"></TableCell>
+                    <TableCell align="center">People</TableCell>
+                    <TableCell align="center">Homeworld</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
                 {data.map(person => (
                     <TableRow key={person.url}>
-                    <TableCell component="th" scope="row">
-                        {person.name}
+                    <TableCell align="center" component="th" scope="row">
+                      <Button style={{width: '300px'}} component={Link} to={{pathname: `/people/${person.url.replace(/[\D]/g, '')}`, state: {pageNr: page}}} variant="contained" color="primary" className={classes.button}>{person.name}</Button>
                     </TableCell>
-                    <TableCell align="right">{person.homeworld.name}</TableCell>
-                    <TableCell align="right">
-                        <Button component={Link} to={`/people/${person.url.replace(/[\D]/g, '')}`} variant="contained" color="primary" className={classes.button}>Primary</Button>
-                    </TableCell>
+                    <TableCell align="center">
+                    <Button style={{width: '300px'}} component={Link} to={`/planets/${person.homeworld.url.replace(/[\D]/g, '')}`} variant="contained" color="primary" className={classes.button}>{person.homeworld.name}</Button></TableCell>
                     </TableRow>
                 ))}
                 </TableBody>

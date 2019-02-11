@@ -31,14 +31,13 @@ class CenteredTabs extends React.Component {
   };
   componentDidMount = () => {
     const path = this.props.location.pathname
-    console.log('state/value ', this.state.value)
     if (path === '/planets') {
-      console.log('if statement running')
+      console.log('if statement running in navbar')
       this.setState({
         value: 1
       })
     } else {
-      console.log('else statement running')
+      console.log('else statement running in navbar')
 
       this.setState({
         value: 0

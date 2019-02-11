@@ -16,6 +16,7 @@ const PEOPLE_QUERY = gql`
             url
             homeworld {
                 name
+                url
             }
         }
     }
@@ -32,22 +33,28 @@ class PeopleView extends Component {
     handleChangePage = (event, page) => {
         this.setState({ page });
     };
+    componentDidMount = () => {
+        if(this.props.location.state) {
+            const prevListPage= this.props.location.state.pageNr
+            this.setState(()=> ({
+                page:prevListPage
+            }))
+        }
+    }
 
     render(){
         const { classes} = this.props
-
+        
         return (
             <>
                 <Query query={PEOPLE_QUERY} variables={{"nr": this.state.page + 1}}>
                     {
                         ({loading, error, data}) => {
 
-                            console.log('logging some data', data)
 
                             if(loading) return data.allPeople ? <PeopleList loading={true} data={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/> : <Spinner />
                             if(error) console.log('there was an error', error)
                             if(data) {
-                                console.log('we got the data', this.state.pageNr)
                                 
                                 return <PeopleList loading={false} data={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/>
                             }
