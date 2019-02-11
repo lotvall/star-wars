@@ -50,7 +50,7 @@ class CenteredTabs extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Paper className={classes.root}>
+      <Paper className={classes.root} elevation={0}>
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}

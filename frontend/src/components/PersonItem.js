@@ -24,12 +24,12 @@ const PersonItem = ({url, name, homeworld, classes}) => {
     return (
         <div className={classes.div}>
             <Paper className={classes.root} elevation={1}>
-                <Typography variant="h4" component="h3">
+                <Typography variant="h5" component="h5">
                     {name}
                 </Typography>
                <hr/>
 
-                <Typography component="p">
+                <Typography variant="h6" component="h5">
                     {homeworld.name}
                 </Typography>
 

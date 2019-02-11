@@ -16,6 +16,11 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import Button from '@material-ui/core/Button';
+
+import { Link } from 'react-router-dom'
+
+
 
 import Spinner from './MiniSpinner'
 
@@ -36,6 +41,9 @@ const styles = theme => ({
     minWidth: 100,
   },
 });
+
+// const MyLink = props => <Link to={"`/people/${person.url.replace(/[\D]/g, '')}`"} {...props} />
+
 
 const actionsStyles = theme => ({
     root: {
@@ -142,7 +150,9 @@ class SimpleTable extends Component {
                         {person.name}
                     </TableCell>
                     <TableCell align="right">{person.homeworld.name}</TableCell>
-                    <TableCell align="right">{person.url}</TableCell>
+                    <TableCell align="right">
+                        <Button component={Link} to={`/people/${person.url.replace(/[\D]/g, '')}`} variant="contained" color="primary" className={classes.button}>Primary</Button>
+                    </TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
