@@ -129,7 +129,7 @@ class SimpleTable extends Component {
 
     render() {
         const { classes , data, page, onChangePage, loading } = this.props;
-        console.log('page number im peoplelist ',page)
+
         return (
             <div className={classes.div}>
             <Paper className={classes.root}>
@@ -144,10 +144,10 @@ class SimpleTable extends Component {
                 {data.map(person => (
                     <TableRow key={person.url}>
                     <TableCell align="center" component="th" scope="row">
-                      <Button style={{width: '300px'}} component={Link} to={{pathname: `/people/${person.url.replace(/[\D]/g, '')}`, state: {pageNr: page}}} variant="contained" color="primary" className={classes.button}>{person.name}</Button>
+                      <Button style={{width: '300px'}} component={Link} to={{pathname: `/people/${person.url.replace(/[\D]/g, '')}`, state: {pageNr: page}}} color="primary" className={classes.button}>{person.name}</Button>
                     </TableCell>
                     <TableCell align="center">
-                    <Button style={{width: '300px'}} component={Link} to={`/planets/${person.homeworld.url.replace(/[\D]/g, '')}`} variant="contained" color="primary" className={classes.button}>{person.homeworld.name}</Button></TableCell>
+                    <Button style={{width: '300px'}} component={Link} to={`/planets/${person.homeworld.url.replace(/[\D]/g, '')}`} color="primary" className={classes.button}>{person.homeworld.name}</Button></TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
