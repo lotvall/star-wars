@@ -13,5 +13,6 @@ TODO:
 - [ ] refactor and clean up code
 - [ ] navbar selector should not render tiny pixel when false
 - [ ] add logic to be able to fetch and render more data per person and planet
+- [ ] refactor resolvers to enable deeper nesting of queries
 - [ ] add logic for movies, vehicles, starships etc...
 
