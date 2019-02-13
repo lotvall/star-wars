@@ -2,11 +2,14 @@ import React from 'react'
 import Avatar from './LetterAvatar'
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom'
+
 
 const styles = theme => ({
     root: {
         paddingLeft: '40px',
-        paddingRight: '40px'
+        paddingRight: '40px',
+
     },
     listrow: {
         display:'flex',
@@ -15,10 +18,12 @@ const styles = theme => ({
         height: 50,
         margin: 0,
         padding:0,
+        textDecoration: 'none',
         '&:hover': {
             backgroundColor: '#fafafb',
             borderColor: '#eeeef0',
             textDecoration: 'none',
+            cursor:'pointer',
             
         }
     },
@@ -32,16 +37,16 @@ const styles = theme => ({
 })
 
 
-const PeopleListItem = ({classes, person}) => {
+const PeopleListItem = ({classes, person, page, onClick}) => {
 
     return (
         <div className={classes.root}>
-            <ul key={person.url} className={classes.listrow}>
+            <Link key={person.url} className={classes.listrow} to={{pathname: `/people/${person.url.replace(/[\D]/g, '')}`, state: {sourcePath:"/people", pageNr: page}}}>
                 <Avatar>{person.name}</Avatar>
                 <Typography className={classes.typography} variant="body1">{person.name}</Typography>
                 <Typography className={classes.typography} variant="body1">{person.species.name} from {person.homeworld.name}</Typography>
 
-            </ul>
+            </Link>
         </div>
     )
 }

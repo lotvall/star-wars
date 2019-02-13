@@ -16,7 +16,21 @@ const PEOPLE_QUERY = gql`
             url
             homeworld {
                 name
-                url
+            }
+            species {
+                name
+            }
+        }
+    }
+`
+
+const PEOPLESEARCH_QUERY = gql`
+    query PeopleSearch ($str: String!){
+        peopleSearch(searchStr: $str) {
+            name
+            url
+            homeworld {
+                name
             }
             species {
                 name
@@ -31,26 +45,41 @@ class PeopleView extends Component {
     state = {
         page: 0,
         isLoading: false,
+        queryStr:'',
     }
 
-    handleChangePage = (event, page) => {
+    handleChangePage = (page) => {
+        console.log('logging page handler', page)
         this.setState({ page });
     };
     componentDidMount = () => {
         if(this.props.location.state) {
+            console.log('component mounted with page', this.state.page)
+            console.log(this.props.location.state)
             const prevListPage= this.props.location.state.pageNr
+            console.log('do we have a prevlist page ', prevListPage)
             this.setState(()=> ({
                 page:prevListPage
             }))
         }
     }
+    handleSearchQuerySubmit = (query) => {
+        console.log('submit', query)
+        this.setState(() => ({
+            queryStr: query
+        }))
+    }
 
     render(){
         const { classes} = this.props
+        console.log('what page in render', +this.state.page)
+         ? console.log('queryStr is truthy') : console.log('query st is falsy')
         
+        const query = this.state.queryStr ? PEOPLESEARCH_QUERY : PEOPLE_QUERY
+        const variables = this.state.queryStr ? {"str": this.state.queryStr } : {"nr": +this.state.page +1 }
         return (
             <>
-                <Query query={PEOPLE_QUERY} variables={{"nr": this.state.page + 1}}>
+                <Query query={query} variables={variables}>
                     {
                         ({loading, error, data}) => {
 
@@ -58,8 +87,8 @@ class PeopleView extends Component {
                             if(loading) return data.allPeople ? <PeopleList loading={true} data={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/> : <Spinner />
                             if(error) console.log('there was an error', error)
                             if(data) {
-                                
-                                return <PeopleList loading={false} data={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/>
+                                console.log(data)                                
+                                return <PeopleList loading={false} data={this.state.queryStr ? data.peopleSearch : data.allPeople} page={this.state.page} onChangePage={this.handleChangePage} onClick={this.handleListItemClick} onSubmit={this.handleSearchQuerySubmit}/>
                             }
                         }
                     }

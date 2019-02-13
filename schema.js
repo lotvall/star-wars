@@ -6,10 +6,10 @@ const schema = buildSchema(`
     url: String!
     name: String!
     homeworld: Planet!
-    species: Species!
+    species: Species
   }
   type Species{
-    name: String!
+    name: String
     homeworld: Planet!
     people: [Person!]!
   }
@@ -21,6 +21,7 @@ const schema = buildSchema(`
 
   type RootQuery {
     allPeople(pageNr: Int): [Person!]!
+    peopleSearch(searchStr: String): [Person!]!
     person(personId: Int!): Person!
 
     allPlanets(pageNr: Int):[Planet!]!

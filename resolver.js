@@ -5,6 +5,7 @@ const UrlLoader = new DataLoader(urls =>
     Promise.all(urls.map(getFromUrl)),
 );
 async function getFromUrl(url) {
+    console.log('get from url was called', url)
     const response = await fetch(url)
     const data = await response.json()
     return data
@@ -15,10 +16,9 @@ const resolvers = {
     person: async ({ personId }) => {
         const person = await UrlLoader.load(`https://swapi.co/api/people/${personId}/`)
         const homeworld = await UrlLoader.load(person.homeworld)
-        const species = await UrlLoader.load(person.species)
+        const species = person.species.length > 1 ? UrlLoader.load(person.species) : 'Unkown species'
 
 
-        console.log('the homeworld',homeworld)
         // residents are an array of urls not an array of People~
         // cannot query: homeworld {residents { name } }
         return {
@@ -29,18 +29,39 @@ const resolvers = {
         }
 
     },
+    peopleSearch: async ({ searchStr }) => {
+        try {
+            const response = await fetch(`https://swapi.co/api/people/?search=${searchStr}`)
+            const data = await response.json()
+            const people = data.results
+            console.log(people)
+            return people.map((person) => {
+                const planetUrl = person.homeworld
+                const homeworld = UrlLoader.load(planetUrl)
+                console.log(person.species)
+                const species = person.species.length > 0 ? UrlLoader.load(person.species[0]) : {name: 'Unkown species'}
+                return {
+                    name: person.name,
+                    url: person.url,
+                    homeworld,
+                    species
+                }
+            })
+        } catch(err) {
+            throw err
+        }
+    },
     allPeople: async ({ pageNr }) => {
-        console.log('logging the page number', pageNr)
         try {
             const response = await fetch(`https://swapi.co/api/people/?page=${pageNr}`)
             const data = await response.json()
 
             const people = data.results
-            console.log('logging people', people)
             return people.map((person) => {
                 const planetUrl = person.homeworld
                 const homeworld = UrlLoader.load(planetUrl)
-                const species = UrlLoader.load(person.species)
+                console.log(person.species)
+                const species = person.species.length > 0 ? UrlLoader.load(person.species[0]) : {name: 'Unkown species'}
                 return {
                     name: person.name,
                     url: person.url,
