@@ -21,6 +21,7 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom'
 
 import Spinner from './MiniSpinner'
+import Avatar from './LetterAvatar'
 
 const styles = theme => ({
   root: {
@@ -28,7 +29,8 @@ const styles = theme => ({
     width: '90%',
     overflowX: 'auto',
     justifyContent: 'center',
-    elevation: 0
+    elevation: 0,
+    
     
   },
   div: {
@@ -36,7 +38,7 @@ const styles = theme => ({
       justifyContent: 'center',
       alignItems: 'center'
   },
-  table: {
+  tablecell: {
   },
 });
 
@@ -136,14 +138,12 @@ class SimpleTable extends Component {
             <Paper className={classes.root} elevation={1}>
             <Table className={classes.table}>
                 <TableHead>
-                <TableRow>
+                <TableRow className={classes.table}>
               <TableCell align="right">
                 { 
                   loading && <Spinner/>                 
                 }
               </TableCell>
-                
-              
 
                 <TablePagination
                   rowsPerPageOptions={[10]}
@@ -161,12 +161,15 @@ class SimpleTable extends Component {
                 </TableHead>
                 <TableBody>
                 {data.map(person => (
-                    <TableRow key={person.url}>
-                    <TableCell align="center" component="th" scope="row">
-                      <Button style={{width: '300px'}} component={Link} to={{pathname: `/people/${person.url.replace(/[\D]/g, '')}`, state: {sourcePath:"/people", pageNr: page}}} color="primary" className={classes.button}>{person.name}</Button>
+                    <TableRow key={person.url} >
+                    <TableCell  component="th" scope="row" className={classes.tablecell}>
+                      <Avatar />
                     </TableCell>
-                    <TableCell align="center">
-                    <Button style={{width: '300px'}} component={Link} to={{pathname: `/planets/${person.homeworld.url.replace(/[\D]/g, '')}`, state: {sourcePath:"/people", pageNr: page}}} color="primary" className={classes.button}>{person.homeworld.name}</Button></TableCell>
+                    <TableCell  component="th" scope="row" className={classes.tablecell}>
+                    <Button component={Link} to={{pathname: `/people/${person.url.replace(/[\D]/g, '')}`, state: {sourcePath:"/people", pageNr: page}}} color="primary" className={classes.button}>{person.name}</Button>
+                    </TableCell>
+                    <TableCell className={classes.tablecell}>
+                    <Button component={Link} to={{pathname: `/planets/${person.homeworld.url.replace(/[\D]/g, '')}`, state: {sourcePath:"/people", pageNr: page}}} color="primary" className={classes.button}>{person.homeworld.name}</Button></TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
