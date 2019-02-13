@@ -33,7 +33,7 @@ class App extends Component {
                 {<Redirect from="/" to="/people" exact/>}
 
                 <Route exact path ="/people" component={PeopleView } />
-                <Route path ="/planets" component={PlanetsView} />
+                <Route exact path ="/planets" component={PlanetsView} />
 
                 <Route exact path='/people/:person_url' component={SinglePersonView}/>
                 <Route exact path='/planets/:planet_url' component={SinglePlanetView}/>

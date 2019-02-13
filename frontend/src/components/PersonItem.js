@@ -51,6 +51,6 @@ const PersonItem = ({id, url, name, homeworld, classes, pageNr}) => {
 
 PersonItem.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+};
   
   export default withStyles(styles)(PersonItem);

@@ -48,10 +48,10 @@ const resolvers = {
         }
     },
 
-    planet: async ( { planetUrl } ) => {
+    planet: async ( { planetId } ) => {
         try {
 
-            const response = await fetch(planetUrl)
+            const response = await fetch(`https://swapi.co/api/planets/${planetId}/`)
             const planet = await response.json()
             const residents = planet.residents.map(personUrl => {
                 return UrlLoader.load(personUrl)

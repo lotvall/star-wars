@@ -30,7 +30,7 @@ class SinglePersonView extends Component {
 
         const id = parseInt(this.props.match.params.person_url)
         console.log(id)
-        const pageNr = this.props.location.state.pageNr
+        const pageNr = this.props.location.state ? this.props.location.state.pageNr : 0
 
 
         return(
@@ -43,7 +43,7 @@ class SinglePersonView extends Component {
                         if(error) console.log('there was an error', error)
                         if(data) console.log(data)
                         const {name, homeworld, url} = data.person
-                        return <PersonItem pageNr={pageNr} name={name} homeworld={homeworld} url={url} id={id}/>
+                        return <PersonItem originalView={true} pageNr={pageNr} name={name} homeworld={homeworld} url={url} id={id}/>
                     }
                 }
             </Query>

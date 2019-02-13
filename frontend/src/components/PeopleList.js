@@ -28,6 +28,7 @@ const styles = theme => ({
     width: '90%',
     overflowX: 'auto',
     justifyContent: 'center',
+    elevation: 0
     
   },
   div: {
@@ -132,27 +133,10 @@ class SimpleTable extends Component {
 
         return (
             <div className={classes.div}>
-            <Paper className={classes.root}>
+            <Paper className={classes.root} elevation={1}>
             <Table className={classes.table}>
                 <TableHead>
                 <TableRow>
-                    <TableCell align="center">People</TableCell>
-                    <TableCell align="center">Homeworld</TableCell>
-                </TableRow>
-                </TableHead>
-                <TableBody>
-                {data.map(person => (
-                    <TableRow key={person.url}>
-                    <TableCell align="center" component="th" scope="row">
-                      <Button style={{width: '300px'}} component={Link} to={{pathname: `/people/${person.url.replace(/[\D]/g, '')}`, state: {pageNr: page}}} color="primary" className={classes.button}>{person.name}</Button>
-                    </TableCell>
-                    <TableCell align="center">
-                    <Button style={{width: '300px'}} component={Link} to={`/planets/${person.homeworld.url.replace(/[\D]/g, '')}`} color="primary" className={classes.button}>{person.homeworld.name}</Button></TableCell>
-                    </TableRow>
-                ))}
-                </TableBody>
-                <TableFooter>
-              <TableRow>
               <TableCell align="right">
                 { 
                   loading && <Spinner/>                 
@@ -174,7 +158,18 @@ class SimpleTable extends Component {
                   ActionsComponent={TablePaginationActionsWrapped}
                 />
               </TableRow>
-            </TableFooter>
+                </TableHead>
+                <TableBody>
+                {data.map(person => (
+                    <TableRow key={person.url}>
+                    <TableCell align="center" component="th" scope="row">
+                      <Button style={{width: '300px'}} component={Link} to={{pathname: `/people/${person.url.replace(/[\D]/g, '')}`, state: {sourcePath:"/people", pageNr: page}}} color="primary" className={classes.button}>{person.name}</Button>
+                    </TableCell>
+                    <TableCell align="center">
+                    <Button style={{width: '300px'}} component={Link} to={{pathname: `/planets/${person.homeworld.url.replace(/[\D]/g, '')}`, state: {sourcePath:"/people", pageNr: page}}} color="primary" className={classes.button}>{person.homeworld.name}</Button></TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
             </Table>
             </Paper>
             </div>

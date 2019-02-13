@@ -18,7 +18,7 @@ const schema = buildSchema(`
     person(personId: Int!): Person!
 
     allPlanets(pageNr: Int):[Planet!]!
-    planet(planetUrl: String!): Planet!
+    planet(planetId: Int!): Planet!
   }
 
   schema {
