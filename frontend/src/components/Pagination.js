@@ -21,6 +21,8 @@ const styles = theme => ({
     alignItems:'center',    
     marginLeft: '5px',
     marginRight: '5px',
+    minWidth: '68px',
+    justifyContent: 'flex-end'
   },
 })
 const Pagination = ({ classes , data, page, onChangePage, loading, onSubmit }) => {
@@ -33,7 +35,7 @@ const Pagination = ({ classes , data, page, onChangePage, loading, onSubmit }) =
     <div className={classes.root}>
       <Search onSubmit={onSubmit}/>
       { loading ? <MiniSpinner /> : <div style={{heigh:'48px', width:'28px'}}> </div>}
-      <Typography className={classes.typography} variant="body1">{firstOnPage} - {lastOnPage} of 87</Typography>
+      <Typography className={classes.typography} variant="caption">{firstOnPage} - {lastOnPage} of 87</Typography>
       <IconButton
         onClick={() => onChangePage(0)}
         disabled={page === 0}
