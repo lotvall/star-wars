@@ -15,6 +15,8 @@ const resolvers = {
     person: async ({ personId }) => {
         const person = await UrlLoader.load(`https://swapi.co/api/people/${personId}/`)
         const homeworld = await UrlLoader.load(person.homeworld)
+        const species = await UrlLoader.load(person.species)
+
 
         console.log('the homeworld',homeworld)
         // residents are an array of urls not an array of People~
@@ -22,7 +24,8 @@ const resolvers = {
         return {
             name: person.name,
             url: person.url,
-            homeworld  
+            homeworld,
+            species
         }
 
     },
@@ -37,10 +40,12 @@ const resolvers = {
             return people.map((person) => {
                 const planetUrl = person.homeworld
                 const homeworld = UrlLoader.load(planetUrl)
+                const species = UrlLoader.load(person.species)
                 return {
                     name: person.name,
                     url: person.url,
-                    homeworld
+                    homeworld,
+                    species
                 }
             })
         } catch(err) {

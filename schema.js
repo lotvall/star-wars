@@ -6,6 +6,12 @@ const schema = buildSchema(`
     url: String!
     name: String!
     homeworld: Planet!
+    species: Species!
+  }
+  type Species{
+    name: String!
+    homeworld: Planet!
+    people: [Person!]!
   }
   type Planet {
     url: String!

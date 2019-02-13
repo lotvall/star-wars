@@ -18,6 +18,9 @@ const PEOPLE_QUERY = gql`
                 name
                 url
             }
+            species {
+                name
+            }
         }
     }
 `

@@ -13,23 +13,21 @@ const styles = {
     margin: 0,
     color: '#fff',
     backgroundColor: indigo[400],
-  },
-  orangeAvatar: {
-    margin: 10,
-    color: '#fff',
-    backgroundColor: deepOrange[500],
-  },
-  purpleAvatar: {
-    margin: 10,
-    color: '#fff',
-    backgroundColor: deepPurple[500],
+    width: '32px',
+    height: '32px',
+    fontSize: '0.75rem',
   },
 };
 
 const LetterAvatars = (props) => {
   const { classes, children } = props;
+  let initials = children.match(/\b\w/g) || [];
+  initials = ((initials.shift() || '') + (initials.pop() || '')).toUpperCase();
+  console.log(initials);
+
+
   return (
-      <Avatar className={classes.avatar}>A</Avatar>
+      <Avatar className={classes.avatar}>{initials}</Avatar>
   );
 }
 
