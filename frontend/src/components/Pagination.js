@@ -30,6 +30,18 @@ const styles = theme => ({
     minWidth: '68px',
     justifyContent: 'flex-end'
   },
+  icon:{
+    heigh:'18px',
+    width:'18px'
+  },
+  iconbutton: {
+    width: '28px',
+    height: '28px',
+    padding:0,
+    display:'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 })
 const Pagination = ({ classes , data, page, onChangePage, loading, onSubmit, searching}) => {
   console.log('logging page in pagination', page)
@@ -44,31 +56,45 @@ const Pagination = ({ classes , data, page, onChangePage, loading, onSubmit, sea
       { loading ? <MiniSpinner /> : searching ? <div style={{border: '2px solid blue', heigh:'48px', width:'28px'}}> </div> : <div style={{heigh:'48px', width:'28px'}}> </div>}
       <Typography className={classes.typography} variant="caption">{firstOnPage} - {lastOnPage} of 87</Typography>
       <IconButton
+        className={classes.iconbutton}
         onClick={() => onChangePage(0)}
         disabled={page === 0}
         aria-label="First Page"
       >
-        <FirstPageIcon/>
+        <FirstPageIcon
+          className={classes.icon}
+        />
       </IconButton>
       <IconButton
+        className={classes.iconbutton}
         onClick={() => onChangePage(page-1)}
         disabled={page === 0}
         aria-label="Previous Page"
       >
-        <KeyboardArrowLeft/>
+        <KeyboardArrowLeft
+          className={classes.icon}
+        />
       </IconButton>
       <IconButton
+        className={classes.iconbutton}
         onClick={() => onChangePage(page+1)}
         disabled={page === 8}
         aria-label="Next Page"
       >
-        <KeyboardArrowRight/>
+        <KeyboardArrowRight
+          className={classes.icon}
+        />
       </IconButton>
       <IconButton
+        className={classes.iconbutton}
         onClick={() => onChangePage(8)}
         disabled={page === 8}
         aria-label="Next Page"
-      ><LastPageIcon/></IconButton>
+      >
+        <LastPageIcon
+          className={classes.icon}
+        />
+      </IconButton>
       </div>
     </div>
     
