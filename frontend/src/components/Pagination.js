@@ -14,6 +14,12 @@ import Search from './Search'
 const styles = theme => ({
   root:{
     display: 'flex',
+    justifyContent: 'space-between',
+    paddingLeft: '40px',
+    paddingRight:'40px',
+  },
+  pagination:{
+    display: 'flex',
     justifyContent: 'flex-end',
   },
   typography: {
@@ -25,7 +31,7 @@ const styles = theme => ({
     justifyContent: 'flex-end'
   },
 })
-const Pagination = ({ classes , data, page, onChangePage, loading, onSubmit }) => {
+const Pagination = ({ classes , data, page, onChangePage, loading, onSubmit, searching}) => {
   console.log('logging page in pagination', page)
   const firstOnPage = page*10+1
   const lastOnPage = 8 ? 87 : page*10+10
@@ -34,7 +40,8 @@ const Pagination = ({ classes , data, page, onChangePage, loading, onSubmit }) =
   return (
     <div className={classes.root}>
       <Search onSubmit={onSubmit}/>
-      { loading ? <MiniSpinner /> : <div style={{heigh:'48px', width:'28px'}}> </div>}
+      <div className={classes.pagination}>
+      { loading ? <MiniSpinner /> : searching ? <div style={{border: '2px solid blue', heigh:'48px', width:'28px'}}> </div> : <div style={{heigh:'48px', width:'28px'}}> </div>}
       <Typography className={classes.typography} variant="caption">{firstOnPage} - {lastOnPage} of 87</Typography>
       <IconButton
         onClick={() => onChangePage(0)}
@@ -52,16 +59,17 @@ const Pagination = ({ classes , data, page, onChangePage, loading, onSubmit }) =
       </IconButton>
       <IconButton
         onClick={() => onChangePage(page+1)}
-        disabled={page === 9}
+        disabled={page === 8}
         aria-label="Next Page"
       >
         <KeyboardArrowRight/>
       </IconButton>
       <IconButton
         onClick={() => onChangePage(8)}
-        disabled={page === 9}
+        disabled={page === 8}
         aria-label="Next Page"
       ><LastPageIcon/></IconButton>
+      </div>
     </div>
     
   )
