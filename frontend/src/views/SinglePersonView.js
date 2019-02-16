@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import Spinner from '../components/Spinner'
+import Spinner from '../components/spinner/Spinner'
 import PersonItem from '../components/PersonItem'
 
 

@@ -55,6 +55,9 @@ const resolvers = {
         try {
             const response = await fetch(`https://swapi.co/api/people/?page=${pageNr}`)
             const data = await response.json()
+            const next = data.next
+            const count = data.count
+            const previous = data.previous
 
             const people = data.results
             return people.map((person) => {

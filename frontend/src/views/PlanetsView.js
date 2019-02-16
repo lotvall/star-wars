@@ -4,7 +4,7 @@ import { Query } from 'react-apollo'
 import PlanetsList from '../components/PlanetsList'
 import PeopleList from '../components/PeopleList'
 
-import Spinner from '../components/Spinner'
+import Spinner from '../components/spinner/Spinner'
 
 
 const PLANETS_QUERY = gql`

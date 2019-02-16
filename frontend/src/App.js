@@ -28,7 +28,6 @@ class App extends Component {
           <Router>
             
             <div className="container" style={{...containerStyle}}>
-              <NavBar />
               <Switch>
                 {<Redirect from="/" to="/people" exact/>}
 

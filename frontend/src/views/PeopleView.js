@@ -3,7 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import PeopleList from '../components/PeopleList'
-import Spinner from '../components/Spinner'
+import Spinner from '../components/spinner/Spinner.js'
+import Toolbar from '../components/Toolbar'
 
 const styles = theme => {
 
@@ -49,15 +50,11 @@ class PeopleView extends Component {
     }
 
     handleChangePage = (page) => {
-        console.log('logging page handler', page)
         this.setState({ page });
     };
     componentDidMount = () => {
         if(this.props.location.state) {
-            console.log('component mounted with page', this.state.page)
-            console.log(this.props.location.state)
-            const prevListPage= this.props.location.state.pageNr
-            console.log('do we have a prevlist page ', prevListPage)
+            const prevListPage = this.props.location.state.pageNr
             this.setState(()=> ({
                 page:prevListPage
             }))
@@ -84,11 +81,30 @@ class PeopleView extends Component {
                         ({loading, error, data}) => {
 
 
-                            if(loading) return data.allPeople ? <PeopleList loading={true} data={data.allPeople} page={this.state.page} onChangePage={this.handleChangePage}/> : <Spinner />
+                            if(loading) return data.allPeople ? 
+                                <PeopleList
+                                    filters={this.state.queryStr || null}
+                                    loading={true} 
+                                    data={data.allPeople} 
+                                    page={this.state.page} 
+                                    onChangePage={this.handleChangePage}
+                                /> 
+                                : <Spinner />
                             if(error) console.log('there was an error', error)
                             if(data) {
                                 console.log(data)                                
-                                return <PeopleList loading={false} data={this.state.queryStr ? data.peopleSearch : data.allPeople} page={this.state.page} onChangePage={this.handleChangePage} onClick={this.handleListItemClick} onSubmit={this.handleSearchQuerySubmit}/>
+                                return(
+                                    <> 
+                                        <PeopleList
+                                            filters={this.state.queryStr || null} 
+                                            loading={false} 
+                                            data={this.state.queryStr ? data.peopleSearch : data.allPeople} 
+                                            page={this.state.page} onChangePage={this.handleChangePage} 
+                                            onClick={this.handleListItemClick} 
+                                            onSubmit={this.handleSearchQuerySubmit}
+                                        />
+                                    </>
+                                )
                             }
                         }
                     }

@@ -7,7 +7,9 @@ TODO:
 - [x] navbar should render the correct selector based on route
 - [x] add SpinnerView when fetching initial page
 - [x] add Spinner in table footer when fetching subsequent pages
-- [x] persist state between route links
+- [x] persist state between route links // perhaps change this to store in url instead of props throigh links
+- [ ] fix bug - two searches in a row spinner view renders instead of minispinner
+
 - [ ] finish PeopleView and SinglePersonView
 - [ ] finish PlanetsView and SinglePlanetView
 - [ ] refactor and clean up code

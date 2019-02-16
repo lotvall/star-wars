@@ -9,13 +9,17 @@ import indigo from '@material-ui/core/colors/indigo';
 import Grid from '@material-ui/core/Grid';
 
 const styles = {
+  root:{
+    paddingLeft: '40px',
+  },
   avatar: {
     margin: 0,
     color: '#fff',
     backgroundColor: indigo[400],
-    width: '32px',
-    height: '32px',
-    fontSize: '0.75rem',
+    width: '40px',
+    height: '40px',
+    fontSize: '1rem',
+
   },
 };
 
@@ -27,7 +31,9 @@ const LetterAvatars = (props) => {
 
 
   return (
+    <div className={classes.root}>
       <Avatar className={classes.avatar}>{initials}</Avatar>
+    </div>
   );
 }
 

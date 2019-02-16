@@ -7,15 +7,13 @@ import { Link } from 'react-router-dom'
 
 const styles = theme => ({
     root: {
-        paddingLeft: '40px',
-        paddingRight: '40px',
 
     },
     listrow: {
         display:'flex',
         alignItems: 'center',
         borderBottom: '1px solid #eeeef0',
-        height: 50,
+        height: 60,
         margin: 0,
         padding:0,
         textDecoration: 'none',
@@ -29,15 +27,17 @@ const styles = theme => ({
     },
     typography: {
         flex: '1 1 0%',
-        marginLeft: '5px',
-        marginRight: '5px',
+        fontSize: 'medium',
+        marginLeft: '10px',
+        marginRight: '10px',
         maxWidth: '654px' // calc(1440-32-80-20)/2
     },
+    
 
 })
 
 
-const PeopleListItem = ({classes, person, page, onClick}) => {
+const PeopleListItem = ({classes, person, page}) => {
 
     return (
         <div className={classes.root}>
